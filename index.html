@@ -65,7 +65,7 @@
         const songs = ['fengkao', 'goodluck', 'shangxia'];
         let currentSongIndex = -1;
         let loopList = false;
-        const lyrics = ['fengkao', 'goodluck', 'shangxia'];
+        let lyrics = [];
 
         function loadSong() {
             const selectedSong = songSelect.value;
@@ -155,11 +155,17 @@
             const lyricBottom = lyricTop + lyricHeight;
             const containerScrollTop = lyricsContainer.scrollTop;
 
-            // Check if the highlighted lyric is out of view
-            if (lyricTop < containerScrollTop || lyricBottom > containerScrollTop + containerHeight) {
-                // Scroll to the highlighted lyric
-                lyricsContainer.scrollTop = lyricTop - (containerHeight - lyricHeight) / 5;
-            }
+            // Calculate the center position of the container
+            const centerPosition = containerScrollTop + containerHeight / 2;
+
+            // Calculate the target scroll position to center the highlighted lyric
+            const targetScrollTop = lyricTop - (containerHeight - lyricHeight) / 2;
+
+            // Smooth scroll to the target position
+            lyricsContainer.scrollTo({
+                top: targetScrollTop,
+                behavior: 'smooth'
+            });
         }
 
         function nextSong() {
