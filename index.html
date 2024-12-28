@@ -81,6 +81,11 @@
         }
 
         audioPlayer.addEventListener('ended', nextSong);
+        audioPlayer.addEventListener('play', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
     </script>
 </body>
 </html>
