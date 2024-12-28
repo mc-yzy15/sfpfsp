@@ -65,7 +65,7 @@
         const songs = ['fengkao', 'goodluck', 'shangxia'];
         let currentSongIndex = -1;
         let loopList = false;
-        let lyrics = ['fengkao', 'goodluck', 'shangxia'];
+        const lyrics = ['fengkao', 'goodluck', 'shangxia'];
 
         function loadSong() {
             const selectedSong = songSelect.value;
@@ -158,7 +158,7 @@
             // Check if the highlighted lyric is out of view
             if (lyricTop < containerScrollTop || lyricBottom > containerScrollTop + containerHeight) {
                 // Scroll to the highlighted lyric
-                lyricsContainer.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2;
+                lyricsContainer.scrollTop = lyricTop - (containerHeight - lyricHeight) / 5;
             }
         }
 
