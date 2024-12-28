@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <title>歌曲播放器</title>
     <style>
         body {
@@ -66,7 +65,7 @@
         const songs = ['fengkao', 'goodluck', 'shangxia'];
         let currentSongIndex = -1;
         let loopList = false;
-        let lyrics = ['fengkao','goodluck','shangxia'];
+        let lyrics = [];
 
         function loadSong() {
             const selectedSong = songSelect.value;
@@ -139,10 +138,28 @@
             lyricsDisplay.querySelectorAll('p').forEach((p, index) => {
                 if (index === previousLyricIndex) {
                     p.classList.add('highlight');
+                    scrollLyricIntoView(p);
                 } else {
                     p.classList.remove('highlight');
                 }
             });
+        }
+
+        function scrollLyricIntoView(highlightedLyric) {
+            if (!highlightedLyric) return;
+
+            const lyricsContainer = lyricsDisplay;
+            const containerHeight = lyricsContainer.clientHeight;
+            const lyricHeight = highlightedLyric.clientHeight;
+            const lyricTop = highlightedLyric.offsetTop;
+            const lyricBottom = lyricTop + lyricHeight;
+            const containerScrollTop = lyricsContainer.scrollTop;
+
+            // Check if the highlighted lyric is out of view
+            if (lyricTop < containerScrollTop || lyricBottom > containerScrollTop + containerHeight) {
+                // Scroll to the highlighted lyric
+                lyricsContainer.scrollTop = lyricTop - (containerHeight - lyricHeight) / 2;
+            }
         }
 
         function nextSong() {
