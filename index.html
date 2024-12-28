@@ -86,6 +86,92 @@
                 songSelect.value = songs[currentSongIndex];
             }
         });
+        audioPlayer.addEventListener('pause', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('volumechange', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('error', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('timeupdate', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('seeked', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('ratechange', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('durationchange', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('emptied', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('stalled', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('suspend', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('abort', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('canplay', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('canplaythrough', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('progress', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('waiting', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.addEventListener('loadeddata', () => {
+            if (loopList && currentSongIndex !== -1) {
+                songSelect.value = songs[currentSongIndex];
+            }
+        });
+        audioPlayer.play();
     </script>
 </body>
 </html>
