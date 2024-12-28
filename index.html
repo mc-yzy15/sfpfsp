@@ -151,29 +151,6 @@
             });
         }
 
-        function scrollLyricIntoView(highlightedLyric) {
-            if (!highlightedLyric) return;
-
-            const lyricsContainer = lyricsDisplay;
-            const containerHeight = lyricsContainer.clientHeight;
-            const lyricHeight = highlightedLyric.clientHeight;
-            const lyricTop = highlightedLyric.offsetTop;
-            const lyricBottom = lyricTop + lyricHeight;
-            const containerScrollTop = lyricsContainer.scrollTop;
-
-            // Calculate the center position of the container
-            const centerPosition = containerScrollTop + containerHeight / 2;
-
-            // Calculate the target scroll position to center the highlighted lyric
-            const targetScrollTop = lyricTop - (containerHeight - lyricHeight) / 2;
-
-            // Smooth scroll to the target position
-            lyricsContainer.scrollTo({
-                top: targetScrollTop,
-                behavior: 'smooth'
-            });
-        }
-
         function nextSong() {
             if (loopList && currentSongIndex !== -1) {
                 currentSongIndex = (currentSongIndex + 1) % songs.length;
