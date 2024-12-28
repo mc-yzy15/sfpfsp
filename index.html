@@ -71,7 +71,7 @@
         const songs = ['fengkao', 'goodluck', 'shangxia'];
         let currentSongIndex = -1;
         let loopList = false;
-        let lyrics = [];
+        let lyrics = songs.map(song => ({ time: 0, text: '' }));
 
         function loadSong() {
             const selectedSong = songSelect.value;
