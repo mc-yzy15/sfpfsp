@@ -28,26 +28,6 @@
             width: 100%;
             margin-top: 10px;
         }
-        #lyrics-display {
-            font-size: 18px;
-            white-space: pre-wrap;
-            text-align: center;
-            margin-top: 20px;
-            height: 300px;
-            overflow-y: auto;
-            border: 2px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3列 */
-            gap: 20px;
-        }
-        #lyrics-display p {
-            margin: 0;
-        }
-        .highlight {
-            color: #ff6347;
-        }
     </style>
 </head>
 <body>
@@ -61,17 +41,14 @@
             <option value="loop">列表循环播放</option>
         </select>
         <audio id="audio-player" controls></audio>
-        <pre id="lyrics-display"></pre>
     </div>
 
     <script>
         const audioPlayer = document.getElementById('audio-player');
-        const lyricsDisplay = document.getElementById('lyrics-display');
         const songSelect = document.getElementById('song-select');
         const songs = ['fengkao', 'goodluck', 'shangxia'];
         let currentSongIndex = -1;
         let loopList = false;
-        let lyrics = ['fengkao', 'goodluck', 'shangxia'];
 
         function loadSong() {
             const selectedSong = songSelect.value;
@@ -86,70 +63,14 @@
             } else if (selectedSong) {
                 currentSongIndex = songs.indexOf(selectedSong);
                 audioPlayer.src = `${selectedSong}.mp3`;
-                fetch(`${selectedSong}.lrc`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('网络响应不正常');
-                        }
-                        return response.text();
-                    })
-                    .then(parseLyrics)
-                    .then(displayLyrics)
-                    .catch(error => {
-                        console.error('加载歌词失败:', error);
-                        lyricsDisplay.textContent = '加载歌词失败，请检查文件路径和内容。';
-                    });
             } else {
                 audioPlayer.src = '';
-                lyricsDisplay.textContent = '';
                 currentSongIndex = -1;
-                lyrics = [];
             }
         }
 
-        function parseLyrics(lrcText) {
-            const lines = lrcText.split('\n');
-            lyrics = lines.map(line => {
-                const timeMatch = line.match(/\[(\d{2}):(\d{2})\.(\d{2})\](.*)/);
-                if (timeMatch) {
-                    const minutes = parseInt(timeMatch[1], 10);
-                    const seconds = parseInt(timeMatch[2], 10);
-                    const milliseconds = parseInt(timeMatch[3], 10);
-                    const time = (minutes * 60 + seconds) * 1000 + milliseconds;
-                    const text = timeMatch[4].trim();
-                    return { time, text };
-                }
-                return null;
-            }).filter(line => line !== null);
 
-            if (lyrics.length === 0) {
-                console.error('解析歌词失败，未找到有效的时间标签。');
-                throw new Error('解析歌词失败，未找到有效的时间标签。');
-            }
 
-            console.log('解析后的歌词:', lyrics);
-            return lyrics;
-        }
-
-        function displayLyrics() {
-            lyricsDisplay.innerHTML = lyrics.map(line => `<p>${line.text}</p>`).join('');
-            updateLyricHighlight();
-        }
-
-        function updateLyricHighlight() {
-            const currentTime = audioPlayer.currentTime * 1000;
-            const currentLyricIndex = lyrics.findIndex(line => line.time > currentTime);
-            const previousLyricIndex = currentLyricIndex - 1;
-
-            lyricsDisplay.querySelectorAll('p').forEach((p, index) => {
-                if (index === previousLyricIndex) {
-                    p.classList.add('highlight');
-                    scrollLyricIntoView(p);
-                } else {
-                    p.classList.remove('highlight');
-                }
-            });
-        }
 
         function nextSong() {
             if (loopList && currentSongIndex !== -1) {
@@ -160,7 +81,6 @@
         }
 
         audioPlayer.addEventListener('ended', nextSong);
-        audioPlayer.addEventListener('timeupdate', updateLyricHighlight);
     </script>
 </body>
 </html>
